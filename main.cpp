@@ -36,7 +36,7 @@ namespace my
         int k = 0;
         
         m.lock();
-        const char* header = i != 0 ? "" : "N\tid\t\t   Progress Bar  Time\n";
+        const char* header = i != 0 ? "" : "N\tid\t\tProgress Bar  Time\n";
         std::cout << header << "\033[" << i + 2 << ";0H" << i << '\t' 
             << std::this_thread::get_id() << "\t";
         m.unlock();
@@ -51,7 +51,7 @@ namespace my
                 std::this_thread::sleep_for(Ms(x + k * 100));
                 std::lock_guard<std::mutex> lock_trhl_l(l);
                 std::cout << std::unitbuf << "\033[" << i + 2 
-                    << ";" << x + 21 << "H\033[42m ";
+                    << ";" << x + 25 << "H\033[42m ";
             }
             //catch(const std::exception& e)
             catch(const char* e)
@@ -61,7 +61,7 @@ namespace my
                 std::this_thread::sleep_for(Ms(x + k * 100));
                 std::lock_guard<std::mutex> lock_trhl_l(l);
                 std::cout << std::unitbuf << "\033[" << i + 2 
-                    << ";" << x + 21 << "H\033[41m ";
+                    << ";" << x + 25 << "H\033[41m ";
             }
         }
         auto end = std::chrono::steady_clock::now();
@@ -70,7 +70,7 @@ namespace my
         std::lock_guard<std::mutex> lock_trh_m(m);
         std::this_thread::sleep_for(Ms(300));
         //std::cout << def << "\033[" << i + 2 << ";32H"
-        std::cout << "\033[49m\033[" << i + 2 << ";32H"
+        std::cout << "\033[49m\033[" << i + 2 << ";38H"
             << elapsed_seconds.count() << "s";
     }
 }
